@@ -19,8 +19,8 @@ public class Server {
 	int clientCount = 0;
 
 	public static void main(String[] args) throws IOException {
-		Server serverobj = new Server(5000);
-		serverobj.startServer();
+		Server newServer = new Server(5000);
+		newServer.startServer();
 	}
 
 	Server(int port) {
@@ -42,8 +42,6 @@ public class Server {
 	}
 
 	private static class ServerThread implements Runnable {
-
-		Server server = null;
 		Socket client = null;
 		BufferedReader in;
 		PrintStream out;
@@ -54,7 +52,6 @@ public class Server {
 		ServerThread(Socket client, int count, Server server) throws IOException {
 
 			this.client = client;
-			this.server = server;
 			this.id = count;
 			System.out.println("Connection " + id + "established with client " + client);
 
@@ -65,7 +62,7 @@ public class Server {
 
 		@Override
 		public void run() {
-			int x = 1;
+			int status = 1;
 			try {
 				while (true) {
 					line = in.readLine();
@@ -74,7 +71,7 @@ public class Server {
 					line = sc.nextLine();
 					if (line.equalsIgnoreCase("close")) {
 						out.println("closed");
-						x = 0;
+						status = 0;
 						System.out.println("Connection ended by server!");
 						break;
 					}
@@ -84,7 +81,7 @@ public class Server {
 				in.close();
 				client.close();
 				out.close();
-				if (x == 0) {
+				if (status == 0) {
 					System.out.println("Server cleaning up.");
 					System.exit(0);
 				}
