@@ -15,7 +15,7 @@ public class BullyAlgo {
 	}
 
 	public static void main(String args[]) throws IOException {
-		System.out.println("Enter the number of process");
+		System.out.println("Enter the number of process:");
 		Scanner in = new Scanner(System.in);
 		n = in.nextInt();
 

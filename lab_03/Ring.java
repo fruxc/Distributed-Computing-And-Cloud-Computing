@@ -23,7 +23,7 @@ public class Ring {
 	}
 
 	public void initialiseRing() {
-		System.out.println("Enter no of processes");
+		System.out.println("Enter no of processes:");
 		noOfProcesses = sc.nextInt();
 		processes = new Process[noOfProcesses];
 		for (int i = 0; i < processes.length; i++) {
@@ -56,7 +56,7 @@ public class Ring {
 
 		while (true) {
 			if (processes[next].active) {
-				System.out.println("Process " + processes[prev].id + " pass Election(" + processes[prev].id + ") to"
+				System.out.println("Process " + processes[prev].id + " pass Election(" + processes[prev].id + ") to "
 						+ processes[next].id);
 				prev = next;
 			}
@@ -69,7 +69,7 @@ public class Ring {
 			}
 		}
 
-		System.out.println("Process" + processes[getMax()].id + "becomes coordinator");
+		System.out.println("Process " + processes[getMax()].id + " becomes coordinator.");
 		int coordinator = processes[getMax()].id;
 
 		prev = coordinator;
@@ -78,7 +78,7 @@ public class Ring {
 		while (true) {
 
 			if (processes[next].active) {
-				System.out.println("Process " + processes[prev].id + "pass Coordinator(" + coordinator
+				System.out.println("Process " + processes[prev].id + " pass Coordinator(" + coordinator
 						+ ") message to process " + processes[next].id);
 				prev = next;
 			}
@@ -86,7 +86,7 @@ public class Ring {
 			if (next == coordinator)
 
 			{
-				System.out.println("End Of Election ");
+				System.out.println("End of Election ");
 				break;
 			}
 		}
