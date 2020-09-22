@@ -2,10 +2,13 @@ package lab_01_Debug;
 
 import java.net.*;
 import java.io.*;
-import java.util.*;
 import java.awt.*;
 
 public class Client_Chat extends Frame implements Runnable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Socket soc;
 	TextField tf;
 	TextArea ta;
@@ -35,6 +38,7 @@ public class Client_Chat extends Frame implements Runnable {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	void setup() {
 		setSize(600, 400);
 		setLayout(new GridLayout(2, 1));
@@ -49,6 +53,7 @@ public class Client_Chat extends Frame implements Runnable {
 		show();
 	}
 
+	@SuppressWarnings("deprecation")
 	public boolean action(Event e, Object o) {
 		if (e.arg.equals("Send")) {
 			try {

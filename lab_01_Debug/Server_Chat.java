@@ -9,6 +9,7 @@ public class Server_Chat {
 	static Vector<String> LoginNames;
 
 	public Server_Chat() throws Exception {
+		@SuppressWarnings("resource")
 		ServerSocket soc = new ServerSocket(5217);
 		ClientSockets = new Vector<Socket>();
 		LoginNames = new Vector<String>();
@@ -16,12 +17,12 @@ public class Server_Chat {
 		while (true) {
 
 			Socket CSoc = soc.accept();
-			AcceptClient obClient = new AcceptClient(CSoc);
+			new AcceptClient(CSoc);
 		}
 	}
 
 	public static void main(String args[]) throws Exception {
-		Server_Chat ob = new Server_Chat();
+		new Server_Chat();
 	}
 
 	class AcceptClient extends Thread {
