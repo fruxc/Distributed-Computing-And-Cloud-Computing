@@ -1,49 +1,47 @@
 package lab_03;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BullyAlgo {
-	static int n;
-	static int process[] = new int[100];
-	static int status[] = new int[100];
-	static int co;
+	static int n, co;
+	static ArrayList<Integer> process = new ArrayList<Integer>();
+	static ArrayList<String> status = new ArrayList<String>();
 
 	BullyAlgo() {
 		n = 0;
 		co = 0;
 	}
 
-	public static void main(String args[]) throws IOException {
-		System.out.println("Enter the number of process:");
-		Scanner in = new Scanner(System.in);
-		n = in.nextInt();
-
+	static void findCoordinator(int x) {
+		x = x - 1;
+		co = x + 1;
 		for (int i = 0; i < n; i++) {
-			System.out.println("For process " + (i + 1) + ":");
-			System.out.println("Status:");
-			status[i] = in.nextInt();
-			System.out.println("Priority");
-			process[i] = in.nextInt();
-		}
-
-		System.out.println("Which process will initiate election?");
-		int ele = in.nextInt();
-
-		elect(ele);
-		System.out.println("Final coordinator is " + co);
-		in.close();
-	}
-
-	static void elect(int ele) {
-		ele = ele - 1;
-		co = ele + 1;
-		for (int i = 0; i < n; i++) {
-			if (process[ele] < process[i]) {
-				System.out.println("Election message is sent from " + (ele + 1) + " to " + (i + 1));
-				if (status[i] == 1)
-					elect(i + 1);
+			if (process.get(x) < process.get(i)) {
+				System.out.println("Election message is sent from " + (x + 1) + " to " + (i + 1));
+				if (status.get(i) == "yes")
+					findCoordinator(i + 1);
 			}
 		}
 	}
+
+	public static void main(String args[]) throws IOException {
+		System.out.println("Enter the number of process:");
+		Scanner sc = new Scanner(System.in);
+		n = sc.nextInt();
+
+		for (int i = 0; i < n; i++) {
+			System.out.println("For process " + (i + 1) + ":");
+			System.out.println("Active Status: (yes/no)");
+			status.add(sc.next());
+			System.out.println("Priority: (0-10)");
+			process.add(sc.nextInt());
+		}
+		System.out.println("Which process will initiate election:");
+		findCoordinator(sc.nextInt());
+		System.out.println("Final Co-Ordinator: " + co);
+		sc.close();
+	}
+
 }
