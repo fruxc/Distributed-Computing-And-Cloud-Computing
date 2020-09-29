@@ -10,10 +10,11 @@ public class CalculatorClient {
             Calculator c = (Calculator) Naming.lookup("rmi://localhost/CalculatorService");
             long d1 = Long.valueOf(args[0]);
             long d2 = Long.valueOf(args[1]);
-            System.out.println(c.sub(d1, d2));
-            System.out.println(c.add(d1, d2));
-            System.out.println(c.mul(d1, d2));
-            System.out.println(c.div(d1, d2));
+            System.out.println("Subtraction: " + c.sub(d1, d2));
+            System.out.println("Addition: " + c.add(d1, d2));
+            System.out.println("Multiplication: " + c.mul(d1, d2));
+            System.out.println("Division: " + c.div(d1, d2));
+            System.out.println("Square Root: " + c.sqrt((double) d1));
         } catch (MalformedURLException me) {
             System.out.println("MalformedURLException");
             System.out.println(me);

@@ -28,4 +28,8 @@ public class CalculatorImp extends java.rmi.server.UnicastRemoteObject implement
     public long div(long a, long b) throws java.rmi.RemoteException {
         return a / b;
     }
+
+    public double sqrt(double a) throws java.rmi.RemoteException {
+        return Math.sqrt(a);
+    }
 }
