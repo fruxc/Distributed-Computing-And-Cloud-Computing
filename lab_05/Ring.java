@@ -8,7 +8,7 @@ class Process {
 
 	public Process(int id) {
 		this.id = id;
-		active = true;
+		this.active = true;
 	}
 
 }
@@ -62,11 +62,9 @@ public class Ring {
 			}
 
 			next = (next + 1) % noOfProcesses;
-			if (next == initiatorProcesss)
 
-			{
+			if (next == initiatorProcesss)
 				break;
-			}
 		}
 
 		System.out.println("Process " + processes[getMax()].id + " becomes coordinator.");

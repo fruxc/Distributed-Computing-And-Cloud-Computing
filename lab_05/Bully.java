@@ -2,20 +2,10 @@ package lab_05;
 
 import java.util.Scanner;
 
-class Process {
-	public int id;
-	public boolean active;
-
-	public Process(int id) {
-		this.id = id;
-		this.active = true;
-	}
-}
-
 public class Bully {
 	Scanner sc;
 	Process[] processes;
-	int noOfProcess;
+	int n;
 
 	public Bully() {
 		sc = new Scanner(System.in);
@@ -23,9 +13,10 @@ public class Bully {
 
 	public void initialiseBully() {
 		System.out.println("Enter no of processes:");
-		noOfProcess = sc.nextInt();
-		processes = new Process[noOfProcess];
-		for (int i = 0; i < noOfProcess; i++) {
+		n = sc.nextInt();
+		processes = new Process[n];
+		// Initializing processes with ID
+		for (int i = 0; i < n; i++) {
 			processes[i] = new Process(i);
 		}
 	}
@@ -33,31 +24,32 @@ public class Bully {
 	public void performElection() {
 
 		try {
+			// 1 second sleep before execution
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println("\nProcess no " + processes[getMax()].id + " fails");
+		System.out.println("\nProcess no " + processes[getMax()].id + " fails\n");
 		processes[getMax()].active = false;
+		// Max ID process failed
 
 		int InitiatorProcessId = 0;
-		boolean notOver = true;
-		while (notOver) {
+		boolean loop = true;
+		while (loop) { // until finds the coordinator
 
-			boolean moreHigherProcesses = false;
-			for (int i = InitiatorProcessId + 1; i < noOfProcess; i++) {
+			boolean highProcessID = false;
+			for (int i = InitiatorProcessId + 1; i < n; i++) {
 				if (processes[i].active) {
 					System.out.println("Process " + InitiatorProcessId + " passes election (" + InitiatorProcessId
 							+ ") message to process " + i);
-					moreHigherProcesses = true;
-
+					highProcessID = true;
 				}
 			}
 			System.out.println();
-			if (moreHigherProcesses) {
+			if (highProcessID) { // confirmation from highest process ID
 
-				for (int i = InitiatorProcessId + 1; i < noOfProcess; i++) {
+				for (int i = InitiatorProcessId + 1; i < n; i++) {
 					if (processes[i].active) {
 						System.out.println("Process " + i + " passes confirmation OK (" + i + ") message to process "
 								+ InitiatorProcessId);
@@ -68,9 +60,9 @@ public class Bully {
 				System.out.println();
 			}
 
-			else {
+			else { // if there is no highest process ID in the processes
 				int coordinator = processes[getMax()].id;
-				System.out.println("Finally Process " + coordinator + " Becomes Coordinator\n");
+				System.out.println("Finally Process " + coordinator + " Becomes The Coordinator\n");
 				for (int i = coordinator - 1; i >= 0; i--) {
 					if (processes[i].active) {
 						System.out.println("Process " + coordinator + " passes coordinator (" + coordinator
@@ -79,7 +71,7 @@ public class Bully {
 				}
 
 				System.out.println("\nEnd of Election");
-				notOver = false;
+				loop = false;
 				break;
 			}
 		}
