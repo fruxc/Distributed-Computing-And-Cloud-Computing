@@ -1,3 +1,5 @@
+package lab_02.RMI.RMISample;
+
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 

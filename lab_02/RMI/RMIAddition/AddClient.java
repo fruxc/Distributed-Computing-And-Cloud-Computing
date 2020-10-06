@@ -1,3 +1,5 @@
+package lab_02.RMI.RMIAddition;
+
 import java.rmi.*;
 
 public class AddClient {

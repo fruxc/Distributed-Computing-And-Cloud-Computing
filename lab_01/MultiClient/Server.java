@@ -1,4 +1,4 @@
-package lab_01_MultipleClient;
+package lab_01.MultiClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;

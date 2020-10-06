@@ -1,3 +1,5 @@
+package lab_02.RMI.RMIEquations;
+
 import java.rmi.Naming;
 
 public class EquationServer {

@@ -1,3 +1,5 @@
+package lab_02.RMI.RMICalculator;
+
 public class CalculatorImp extends java.rmi.server.UnicastRemoteObject implements Calculator {
 
     /**

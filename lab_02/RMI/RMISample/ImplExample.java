@@ -1,3 +1,5 @@
+package lab_02.RMI.RMISample;
+
 // Implementing the remote interface
 public class ImplExample implements Hello {
     // Implementing the interface method

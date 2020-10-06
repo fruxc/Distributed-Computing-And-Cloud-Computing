@@ -1,4 +1,4 @@
-package lab_01_Debug;
+package lab_01.Debug;
 
 import java.net.*;
 import java.util.*;

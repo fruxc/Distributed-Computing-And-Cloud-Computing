@@ -1,4 +1,4 @@
-package lab_02;
+package lab_02.RPC.RPCCalculator;
 
 import java.util.*;
 import java.net.*;

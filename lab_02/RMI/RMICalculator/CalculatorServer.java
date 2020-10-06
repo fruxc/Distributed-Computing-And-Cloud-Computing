@@ -1,3 +1,5 @@
+package lab_02.RMI.RMICalculator;
+
 import java.rmi.Naming;
 
 public class CalculatorServer {
