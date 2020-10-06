@@ -17,7 +17,7 @@ public class Server extends Thread {
 		serverSocket = new ServerSocket(port);
 	}
 
-	public void run() {
+	public void run(){
 		while (true) {
 			try {
 				Socket server = serverSocket.accept();
@@ -38,7 +38,7 @@ public class Server extends Thread {
 	}
 
 	public static void main(String[] args) throws IOException {
-		int port = 1333;
+		int port = 5000;
 		Thread t = new Server(port);
 		t.start();
 	}

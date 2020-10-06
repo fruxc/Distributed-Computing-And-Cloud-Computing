@@ -13,27 +13,46 @@ import java.util.logging.Logger;
 
 public class Client {
 	public static SimpleDateFormat SDF = new SimpleDateFormat("HH:mm:ss");
-	public static long Timer;
+	public static long currentTime;
 	private static String serverName;
 	private static int serverPort;
-	private static long NewTime;
+	private static long timeNext;
 
-	public static class InternalInaccuratClock extends Thread {
+	public static class Update {
+		public void run() throws IOException {
+			Socket client = new Socket(serverName, serverPort);
+			OutputStream outToServer = client.getOutputStream();
+			DataOutputStream out = new DataOutputStream(outToServer);
+			InputStream inFromServer = client.getInputStream();
+			DataInputStream in = new DataInputStream(inFromServer);
+			int i = 10;
+			out.writeInt(10);
+			for (int j = 0; j < i; j++) {
+				timeNext += in.readLong();
+			}
+			timeNext /= i;
+			currentTime = timeNext;
+			timeNext = 0;
+			System.out.println("New Time is " + SDF.format(currentTime));
+			client.close();
+		}
+	}
 
-		private long Drift;
+	public static class InacurateClockTime extends Thread {
+		private long changeInTime;
 
-		public InternalInaccuratClock(long how_inaacurate) {
-			Drift = how_inaacurate;
-			Timer = System.currentTimeMillis();
+		public InacurateClockTime(long inaccuracy) {
+			changeInTime = inaccuracy;
+			currentTime = System.currentTimeMillis();
 		}
 
+		@Override
 		public void run() {
-
 			while (true) {
 				try {
-					Thread.sleep(1000 + Drift);
-					Timer += 1000;
-					System.out.println(SDF.format(Timer));
+					Thread.sleep(1000 + changeInTime);
+					currentTime += 1000;
+					System.out.println(SDF.format(currentTime));
 
 				} catch (InterruptedException ex) {
 					Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,46 +67,19 @@ public class Client {
 
 	}
 
-	public static class Update {
-		public void run() throws IOException {
-			Socket client;
-			client = new Socket(serverName, serverPort);
-			OutputStream outToServer = client.getOutputStream();
-			DataOutputStream out = new DataOutputStream(outToServer);
-			InputStream inFromServer = client.getInputStream();
-			DataInputStream in = new DataInputStream(inFromServer);
-			int i = 10;
-			out.writeInt(10);
-			for (int j = 0; j < i; j++) {
-				NewTime += in.readLong();
-			}
-
-			NewTime /= i;
-
-			Timer = NewTime;
-			NewTime = 0;
-			System.out.println("New Time is " + SDF.format(Timer));
-			client.close();
-		}
-	}
-
 	public static void main(String[] args) throws InterruptedException, IOException {
-		// TODO code application logic here
 		Scanner sc = new Scanner(System.in);
-		long clockinaccuracy;
 		System.out.println("How inaccurate is the clock");
-		clockinaccuracy = sc.nextLong();
-		String serverName = "localhost";
-		int serverPort = 1333;
-		new Client(serverName, serverPort);
-		Client.InternalInaccuratClock C = new InternalInaccuratClock(clockinaccuracy);
+		long inaccuracy = sc.nextLong();
+		new Client("localhost", 5000);
+		Client.InacurateClockTime time = new InacurateClockTime(inaccuracy);
 		Client.Update U = new Update();
-
 		System.out.println("How often check the clock");
-		long CC = sc.nextLong();
-		C.start();
+		long checkTime = sc.nextLong();
+		sc.close();
+		time.start();
 		while (true) {
-			Thread.sleep(CC);
+			Thread.sleep(checkTime);
 			U.run();
 		}
 	}
