@@ -53,7 +53,6 @@ public class Client {
 					Thread.sleep(1000 + changeInTime);
 					currentTime += 1000;
 					System.out.println(SDF.format(currentTime));
-
 				} catch (InterruptedException ex) {
 					Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
 				}
@@ -64,7 +63,6 @@ public class Client {
 	public Client(String serverName, int serverPort) {
 		Client.serverName = serverName;
 		Client.serverPort = serverPort;
-
 	}
 
 	public static void main(String[] args) throws InterruptedException, IOException {

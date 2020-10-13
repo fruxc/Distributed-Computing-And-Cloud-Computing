@@ -19,5 +19,4 @@ public class ServerOne {
 			System.out.println(ex);
 		}
 	}
-
 }

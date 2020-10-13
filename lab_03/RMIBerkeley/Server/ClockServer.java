@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 public interface ClockServer extends Remote {
 
-    LocalTime getTime() throws RemoteException;
+	LocalTime getTime() throws RemoteException;
 
-    void adjustTime(LocalTime timeClient, long changeInTime) throws RemoteException;
+	void adjustTime(LocalTime timeClient, long changeInTime) throws RemoteException;
 }
