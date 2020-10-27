@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 
 public class SharedMemoryClient {
+
 	public static void main(String args[]) throws Exception {
 		BufferedReader sin;
 		PrintStream sout;
@@ -25,5 +26,4 @@ public class SharedMemoryClient {
 		sout.close();
 		stdin.close();
 	}
-
 }

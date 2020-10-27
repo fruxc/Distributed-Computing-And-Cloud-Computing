@@ -18,10 +18,10 @@ class ServerInside {
 
 	boolean hasToken = false;
 	boolean sendData = false;
-	int recport;
+	int recPort;
 
-	void recPort(int recport) {
-		this.recport = recport;
+	void recPort(int recPort) {
+		this.recPort = recPort;
 	}
 
 	void recData() throws Exception {
@@ -30,7 +30,7 @@ class ServerInside {
 		DatagramPacket dp;
 		String str;
 
-		ds = new DatagramSocket(recport);
+		ds = new DatagramSocket(recPort);
 		dp = new DatagramPacket(buff, buff.length);
 		ds.receive(dp);
 		ds.close();

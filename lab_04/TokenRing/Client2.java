@@ -31,7 +31,7 @@ public class Client2 {
 					Server.setSendData = true;
 					Server.sendData();
 				} else if (str1.equalsIgnoreCase("no")) {
-					System.out.println("Token Waiting...");
+					System.out.println("Waiting...");
 					tokenClient.sendData();
 					hasToken = false;
 				}

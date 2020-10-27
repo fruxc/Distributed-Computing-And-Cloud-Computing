@@ -9,11 +9,10 @@ public class SharedMemoryServer {
 	static int a = 50;
 	static int count = 0;
 
-	public static int getA(PrintStream cout) {
+	public static void getA(PrintStream cout) {
 		count++;
 		--a;
 		cout.println(a);
-		return a;
 	}
 
 	public void setA(int a) {
@@ -34,6 +33,7 @@ public class SharedMemoryServer {
 			Scanner sc = new Scanner(s);
 			op = sc.next();
 			if (op.equalsIgnoreCase("show")) {
+				getA(cout);
 			} else {
 				cout.println("Check Syntax");
 				break;
