@@ -1,20 +1,20 @@
-package lab_04;
+package lab_04.TokenRing;
 
 import java.net.*;
 
-public class TokenServer {
+public class Server {
 	public static void main(String agrs[]) throws Exception {
 		int port = 8000;
 		System.out.println("Server Started on " + port);
 		while (true) {
-			Server sr = new Server();
+			ServerInside sr = new ServerInside();
 			sr.recPort(port);
 			sr.recData();
 		}
 	}
 }
 
-class Server {
+class ServerInside {
 
 	boolean hasToken = false;
 	boolean sendData = false;
@@ -36,6 +36,6 @@ class Server {
 		ds.close();
 
 		str = new String(dp.getData(), 0, dp.getLength());
-		System.out.println("The message is " + str);
+		System.out.println(str);
 	}
 }
