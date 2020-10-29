@@ -20,14 +20,15 @@ public class Client1 {
 			tokenServer.setSendPort(9000);
 
 			if (tokenClient.hasToken == true) {
-				System.out.println("Do you want to enter the Data –> Yes/No?");
+				System.out.println("Want to send more data?");
+				System.out.println("(Yes/No)?");
 				br = new BufferedReader(new InputStreamReader(System.in));
 				str = br.readLine();
 				if (str.equalsIgnoreCase("yes")) {
-					System.out.println("Ready to send");
 					tokenServer.setSendData = true;
 					tokenServer.sendData();
 					tokenServer.setSendData = false;
+					System.out.println("Sent");
 				} else if (str.equalsIgnoreCase("no")) {
 					System.out.println("Waiting...");
 					tokenClient.sendData();
@@ -82,7 +83,7 @@ class ClientInside1 {
 	}
 
 	void recData() throws Exception {
-		String msgstr;
+		String msgStr;
 		byte buffer[] = new byte[256];
 		DatagramSocket ds;
 		DatagramPacket dp;
@@ -91,10 +92,10 @@ class ClientInside1 {
 		dp = new DatagramPacket(buffer, buffer.length);
 		ds.receive(dp);
 		ds.close();
-		msgstr = new String(dp.getData(), 0, dp.getLength());
-		System.out.println("The data is " + msgstr);
+		msgStr = new String(dp.getData(), 0, dp.getLength());
+		System.out.println("The data is " + msgStr);
 
-		if (msgstr.equals("Token")) {
+		if (msgStr.equals("Token")) {
 			hasToken = true;
 		}
 	}
